@@ -1,9 +1,10 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
-require 'multi_json'
+require 'json'
 require 'faraday'
 require 'faraday_middleware'
+require 'rack/rewrite'
 
 class RadiumConnection
   attr_reader :token
@@ -39,8 +40,6 @@ class LeadServer < Sinatra::Application
     @token = token
   end
 
-  set :public_folder, Proc.new { File.join(root, "public") }
-
   post '/' do
     connection = RadiumConnection.new self.class.token
     radium_response = connection.post params
@@ -49,6 +48,12 @@ class LeadServer < Sinatra::Application
 
     headers radium_response.headers
     status radium_response.status
-    body MultiJson.dump(radium_response.body)
+    body JSON.dump(radium_response.body)
+  end
+
+  post '/echo' do
+    status 200
+    headers "Content-Type" => "text/plain"
+    body JSON.pretty_generate(params)
   end
 end

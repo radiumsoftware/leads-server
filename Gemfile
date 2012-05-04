@@ -2,9 +2,10 @@ source :rubygems
 
 gem 'sinatra'
 gem 'thin'
-gem 'multi_json'
+gem 'json'
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'rack-rewrite'
 
 group :test do
   gem 'rack-test'

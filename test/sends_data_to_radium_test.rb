@@ -9,7 +9,7 @@ class ProxyTest < MiniTest::Unit::TestCase
   end
 
   def json
-    MultiJson.dump({ :contact => { :radium => :data }})
+    JSON.dump({ :contact => { :radium => :data }})
   end
 
   def test_posts_date_with_token_to_radium

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Leads</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/app.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="page-header">
+        <h1>Radium Lead Form</h1>
+      </div>
+
+      <p>
+      This is a simple application you can fork and use to generate your own lead capture form to work with Radium.
+      </p>
+
+      <p>
+      The form is setup with some basic information. Your job to create a form that make sense with the Radium api.
+      You can add more fields to mix and match emails/phones numbers/addresses/extra fields and notes to get it
+      how you want it. When have generated the form the way you want it, press "Test". This shows you the generated
+      JSON that will be sent to Radium. You can test as many times as you want.
+      </p>
+
+      <p>
+      The submitting the form will send the data to Radium so you can test out how it works. You can use this as a 
+      base to create something for your own website.
+      </p>
+
+      <hr>
+
+      <form class="well" id="lead-form" action="/" method="POST">
+        <div class="control-group">
+          <label>Name</label>
+          <input type="text" class="span3" name="contact[name]">
+        </div>
+
+        <div class="control-group">
+          <label>Email Address</labeL>
+          <input type="hidden" name="contact[email_address_attributes][][name]" value="Primary">
+          <input type="text" class="span3" name="contact[email_address_attributes][][value]">
+        </div>
+
+        <div class="control-group">
+          <label>Twitter</label>
+          <div class="input-prepend">
+            <input type="hidden" name="contact[fields_attributes][][name]" value="Twitter">
+            <span class="add-on">@</span><input class="span2" id="prependedInput" size="16" type="text" name="contact[fields_attributes][][value]">
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label>Country</labeL>
+          <input type="hidden" name="contact[address_attributes][][name]" value="Primary">
+          <input type="text" class="span3" name="contact[address_attributes][][country]">
+        </div>
+
+        <div class="control-group">
+          <label>Company</labeL>
+          <input type="text" class="span3" name="contact[group_names][]">
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-secondary" id="test-button">Test</button>
+        </div>
+      </form>
+
+      <div class="alert alert-info" id="json-container">
+        <button class="close" data-dismiss="alert">×</button>
+        <pre id="json">
+        </pre>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+    </div>
+
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/app.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,12 @@
+body {
+  padding-top: 40px;
+}
+
+#json-container { 
+  display: none;
+}
+
+#json {
+  border: none;
+  background: none;
+}
