@@ -51,6 +51,25 @@ class LeadServer < Sinatra::Application
     body JSON.dump(radium_response.body)
   end
 
+  post '/simple' do
+    contact_params = { :contact => {
+      :name => params[:name],
+      :email_addresses_attributes => [{
+        :name => "Personal",
+        :value => params[:email]
+      }]
+    }}
+
+    connection = RadiumConnection.new self.class.token
+    radium_response = connection.post contact_params
+
+    radium_response.headers.delete('status')
+
+    headers radium_response.headers
+    status radium_response.status
+    body JSON.dump(radium_response.body)
+  end
+
   post '/echo' do
     status 200
     headers "Content-Type" => "text/plain"

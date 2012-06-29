@@ -32,6 +32,20 @@ class ProxyTest < MiniTest::Unit::TestCase
     assert_equal last_response.body, json
   end
 
+  def test_accepts_simplified_data
+    stub_request(:post, "http://api.radiumcrm.com/leads").to_return({
+      :status => 200,
+      :headers => { "Content-Type" => 'application/json' },
+      :body => json
+    })
+
+    post '/simple', :name => 'foo', :email => 'bar'
+
+    assert last_response.ok?
+
+    assert_equal last_response.body, json
+  end
+
   def test_does_not_include_the_status_from_radium_in_the_headers
     stub_request(:post, "http://api.radiumcrm.com/leads").to_return({
       :status => 200,
